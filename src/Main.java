@@ -2,31 +2,18 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-
-        Snack x = new Snack("Chips");
-        String y = x.getName();
-        System.out.println(y);
-
-        SoftDrink z = new SoftDrink("Coke");
-        y = z.getName();
-        System.out.println(y);
-
         SoftDrinksCompartment lager = new SoftDrinksCompartment();
-        System.out.println(Arrays.toString(lager.getStock()));
-        int c = lager.stockCounter();
-        System.out.println(c);
-        SoftDrinksCompartment lager2 = new SoftDrinksCompartment(3);
-        System.out.println(Arrays.toString(lager2.getStock()));
-        String str = "test";
-        str = str.toUpperCase();
-        System.out.println(str);
 
-        String[] returnList;
-        returnList = new String[0];
-        System.out.println(Arrays.toString(returnList));
-        for (int i = 0; i<returnList.length; i++){
-            System.out.println("kfldsj");
-        }
+        lager.refill(3, "Cola");
+        lager.refill(2, "Tea");
+
+        System.out.println(lager.stockCounter()); //5
+        System.out.println(lager.productCounter("Cola")); //3
+
+        lager.refill(1, "Cola");
+
+        System.out.println(lager.stockCounter()); //6
+        System.out.println(lager.productCounter("Cola")); //4
 
     }
 }
