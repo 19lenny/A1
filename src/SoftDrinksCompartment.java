@@ -105,6 +105,7 @@ public class SoftDrinksCompartment {
         //if it is not big enough, return the maximum amount the vending machine has for this product
         // additionally amount, which the user putted gets updated to the nr of product she gets.
         //the users have to be informed that she does not get the full amount or no amount.
+        //if we dont have any we can abort the method and just return the empty array
         else{
             amount = stockOfProduct;
             returnList = new SoftDrink[amount];
@@ -113,7 +114,8 @@ public class SoftDrinksCompartment {
                         "But we can give you " + stockOfProduct);
             }
             else {
-                System.out.println("Hey, we are sorry. We don't have any" + name + " in Stock. \n");
+                System.out.println("Hey, we are sorry. We don't have any " + name + " in Stock. \n");
+                return returnList;
             }
         }
 
@@ -122,18 +124,21 @@ public class SoftDrinksCompartment {
         //starting with a helping counter, to define the position in which the vending machine has to give out the drink.
         int counter = 0;
         //go through every product in stock
-        for (int i = 0; i <stock.length; i++) {
+        for (int i = 0; i < stock.length; i++) {
             //if we got all the products we need, then we can exit the for loop and return the products to the user
-            if (counter >= amount){
+            if (counter >= amount) {
                 break;
             }
             //if it's the correct product add it to the users return and
             // delete it from the stock of the vending machine
             //additionally set the counter one up, since we returned one more item to the user.
-            else if (stock[i].getName().equals(name)){
-                returnList[counter] =stock[i];
-                counter++;
-                stock[i] = null;
+            //first check if slot is empty, because if its empty we cannot check the name of the product
+            else if (stock[i] != null) {
+                if (stock[i].getName().equals(name)) {
+                    returnList[counter] = stock[i];
+                    counter++;
+                    stock[i] = null;
+                }
             }
         }
         //this returns the list of drinks the user ordered
@@ -147,9 +152,4 @@ public class SoftDrinksCompartment {
         return dispender(1, productName);
     }
 
-    //This method is a getter method for the field variable stock.
-    //It returns the list of SoftDrinks that are in stock.
-    public SoftDrink[] getStock() {
-        return stock;
-    }
 }

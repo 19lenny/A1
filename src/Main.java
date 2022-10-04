@@ -15,5 +15,23 @@ public class Main {
         System.out.println(lager.stockCounter()); //6
         System.out.println(lager.productCounter("Cola")); //4
 
+        lager.dispender(2, "Cola");
+        System.out.println(lager.stockCounter()); //4
+        System.out.println(lager.productCounter("Cola")); //2
+
+        lager.dispender("Cola");
+        System.out.println(lager.stockCounter()); //3
+        System.out.println(lager.productCounter("Cola")); //1
+
+        lager.dispender("Cola");
+        System.out.println(lager.stockCounter()); //2
+        System.out.println(lager.productCounter("Cola")); //0
+
+        lager.dispender("Cola");
+        System.out.println(lager.stockCounter()); //2
+        System.out.println(lager.productCounter("Cola")); //0
+
+
+
     }
 }
