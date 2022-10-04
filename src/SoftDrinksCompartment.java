@@ -60,14 +60,14 @@ public class SoftDrinksCompartment {
         return counter;
     }
 
-    public void refill(String[] fillingList){
+    public void refill(int amount, String filling){
         //calculate the remaining slots for SoftDrinks in our vending machine
         int remainingSlots = capacity - stockCounter();
         //If the refiller wants to put more SoftDrinks in the machine as remaining capacity, the method should stop
-        if (remainingSlots < fillingList.length){
+        if (remainingSlots < amount){
             System.out.println("Dear refiller, you tried to refill the vending machine with soft drinks. \n" +
                     "Unfortunately, there are only "+remainingSlots+ "left for soft drinks in the machine. \n" +
-                    "You tried to put "+ fillingList.length+" drinks in the machine. \n" +
+                    "You tried to put "+ amount+" drinks in the machine. \n" +
                     "Please try again, after removing some.");
         }
         //else: the refiller puts in a correct amount
@@ -79,7 +79,7 @@ public class SoftDrinksCompartment {
             int filled = 0;
             for (int i=0; i<stock.length; i++){
                 if (stock[i] == null){
-                    stock[i] =  new SoftDrink(fillingList[filled]);
+                    stock[i] =  new SoftDrink(filling);
                     filled++;
                 }
             }
