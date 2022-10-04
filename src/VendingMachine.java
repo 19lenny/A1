@@ -17,6 +17,21 @@ public class VendingMachine {
         softDrinkPrice = chosenSoftDrinkPrice;
     }
 
+
+    //getters to test the compartments from the outside.
+    //It is not part of the assignment, but with that it is easier to test.
+    public CashCompartment getCashCompartment() {
+        return cashCompartment;
+    }
+
+    public SnacksCompartment getSnacksCompartment() {
+        return snacksCompartment;
+    }
+
+    public SoftDrinksCompartment getSoftDrinksCompartment() {
+        return softDrinksCompartment;
+    }
+
     public SoftDrink[] buySoftDrink(int numberOfDrinks, String drinkName, double cashInput) {
 
         //calculate the price the user has to pay for its products
@@ -121,5 +136,17 @@ public class VendingMachine {
             Snack[] notEnoughFunds = new Snack[0];
             return notEnoughFunds;
         }
+    }
+
+    //refill the drinks with the help of the softDrinksCompartment
+    public void refillDrinks(int amount, String drinkName){
+        softDrinksCompartment.refill(amount, drinkName);
+        System.out.println("Thanks for refilling the drinks.");
+    }
+
+    //refill the snacks with the help of the snacksCompartment
+    public void refillSnacks(int amount, String snackName){
+        softDrinksCompartment.refill(amount, snackName);
+        System.out.println("Thanks for refilling the snacks.");
     }
 }
