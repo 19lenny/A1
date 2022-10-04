@@ -5,7 +5,7 @@ public class Main {
         //setting up a vending machine
         VendingMachine monster = new VendingMachine(22.20,15.8);
         //test to do operations on the drink side
-        monster.refillDrinks(5, "Coke");
+        monster.refillDrinks(8, "Coke");
         monster.refillDrinks(2, "Tea");
         System.out.println(monster.getSoftDrinksCompartment().stockCounter());
 
