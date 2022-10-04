@@ -99,12 +99,17 @@ public class SoftDrinksCompartment {
         }
         //if it is not big enough, return the maximum amount the vending machine has for this product
         // additionally amount, which the user putted gets updated to the nr of product she gets.
-        //the users have to be informed that she does not get the full amount.
+        //the users have to be informed that she does not get the full amount or no amount.
         else{
-            System.out.println("Hey, we are sorry. We don't have "+ amount+ " of "+name+" in Stock. \n" +
-                    "But we can give you "+stockOfProduct);
             amount = stockOfProduct;
             returnList = new SoftDrink[amount];
+            if (stockOfProduct >0) {
+                System.out.println("Hey, we are sorry. We don't have " + amount + " " + name + " in Stock. \n" +
+                        "But we can give you " + stockOfProduct);
+            }
+            else {
+                System.out.println("Hey, we are sorry. We don't have any" + name + " in Stock. \n");
+            }
         }
 
         //the returnList is prepared, now lets get the drinks out of the vending machine and
@@ -128,6 +133,13 @@ public class SoftDrinksCompartment {
         }
         //this returns the list of drinks the user ordered
         return returnList;
+    }
+
+    //this method returns exactly one soft drink with a desired name
+    //for this the method simply calls the overloading method with the amount of 1
+    //if there is a drink it will be returned as an array
+    public SoftDrink[] dispender(String productName){
+        return dispender(1, productName);
     }
 
     //This method is a getter method for the field variable stock.
