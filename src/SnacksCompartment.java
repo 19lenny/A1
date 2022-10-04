@@ -9,7 +9,7 @@ public class SnacksCompartment {
 
     //Constructor
     //The constructor sets the capacity to a default value of 8.
-    //6 seems a reasonabale amount to hold Snacks in a SnacksCompartment.
+    //6 seems a reasonable amount to hold Snacks in a SnacksCompartment.
     //additionally the stock of the SnacksCompartment is created.
     //The stock is empty in the beginning and therefore only contains null values.
     public SnacksCompartment(){
@@ -106,7 +106,7 @@ public class SnacksCompartment {
         //if it is not big enough, return the maximum amount the vending machine has for this product
         // additionally amount, which the user putted gets updated to the nr of product she gets.
         //the users have to be informed that she does not get the full amount or no amount.
-        //if we dont have any we can abort the method and just return the empty array
+        //if we don't have any we can abort the method and just return the empty array
         else{
 
             if (stockOfProduct >0) {
