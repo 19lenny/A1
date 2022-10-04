@@ -4,7 +4,7 @@ public class SoftDrinksCompartment {
     private int capacity;
 
     //This field declares the array which stores the SoftDrinks in the SoftDrinksCompartment
-    private SoftDrink [] stock;
+    private SoftDrink[] stock;
 
     //Constructor
     //The constructor sets the capacity to a default value of 8.
