@@ -20,5 +20,13 @@ public class Main {
         String str = "test";
         str = str.toUpperCase();
         System.out.println(str);
+
+        String[] returnList;
+        returnList = new String[0];
+        System.out.println(Arrays.toString(returnList));
+        for (int i = 0; i<returnList.length; i++){
+            System.out.println("kfldsj");
+        }
+
     }
 }

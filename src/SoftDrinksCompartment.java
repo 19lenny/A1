@@ -42,7 +42,7 @@ public class SoftDrinksCompartment {
     //It returns the calculated value.
     //The value is not stored as a field variable and therefore has to be calculated newly with every call
     //This makes sense since we always want to have the newest update of the stock of this specific SoftDrink
-    //The method takes a string as an input, which is the product that should be counted
+    //The method takes a string as an input, which is the product name that should be counted
     //For easier comparison and to avoid typing mistakes all Strings in this method are manipulated to uppercase letters
     public int productCounter(String product){
         int counter = 0;
@@ -84,6 +84,50 @@ public class SoftDrinksCompartment {
                 }
             }
         }
+    }
+
+    //if the amount is 0, then the list will be empty and no error occurs
+    public SoftDrink[] dispender(int amount, String name){
+        //initally check how many soft drinks of the asked product are in stock
+        int stockOfProduct = productCounter(name);
+        //declare returnlist, that has to be filled in a later stage
+        SoftDrink[] returnList;
+        //if there are enough products in stock,
+        // then create a returnList that is big enough to return the full users wish
+        if (stockOfProduct >= amount){
+            returnList = new SoftDrink[amount];
+        }
+        //if it is not big enough, return the maximum amount the vending machine has for this product
+        // additionally amount, which the user putted gets updated to the nr of product she gets.
+        //the users have to be informed that she does not get the full amount.
+        else{
+            System.out.println("Hey, we are sorry. We don't have "+ amount+ " of "+name+" in Stock. \n" +
+                    "But we can give you "+stockOfProduct);
+            amount = stockOfProduct;
+            returnList = new SoftDrink[amount];
+        }
+
+        //the returnList is prepared, now lets get the drinks out of the vending machine and
+        // add them to the customers order = returnList
+        //starting with a helping counter, to define the position in which the vending machine has to give out the drink.
+        int counter = 0;
+        //go through every product in stock
+        for (int i = 0; i <stock.length; i++) {
+            //if we got all the products we need, then we can exit the for loop and return the products to the user
+            if (counter >= amount){
+                break;
+            }
+            //if it's the correct product add it to the users return and
+            // delete it from the stock of the vending machine
+            //additionally set the counter one up, since we returned one more item to the user.
+            else if (stock[i].getName().equals(name)){
+                returnList[counter] =stock[i];
+                counter++;
+                stock[i] = null;
+            }
+        }
+        //this returns the list of drinks the user ordered
+        return returnList;
     }
 
     //This method is a getter method for the field variable stock.
