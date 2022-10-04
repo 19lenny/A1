@@ -31,7 +31,9 @@ public class Main {
         System.out.println(lager.stockCounter()); //2
         System.out.println(lager.productCounter("Cola")); //0
 
-
+        lager.dispender(7,"Tea");
+        System.out.println(lager.stockCounter()); //0
+        System.out.println(lager.productCounter("Tea")); //0
 
     }
 }

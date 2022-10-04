@@ -107,16 +107,21 @@ public class SoftDrinksCompartment {
         //the users have to be informed that she does not get the full amount or no amount.
         //if we dont have any we can abort the method and just return the empty array
         else{
-            amount = stockOfProduct;
-            returnList = new SoftDrink[amount];
+
             if (stockOfProduct >0) {
                 System.out.println("Hey, we are sorry. We don't have " + amount + " " + name + " in Stock. \n" +
                         "But we can give you " + stockOfProduct);
+                amount = stockOfProduct;
+                returnList = new SoftDrink[amount];
             }
+
             else {
                 System.out.println("Hey, we are sorry. We don't have any " + name + " in Stock. \n");
+                amount = stockOfProduct;
+                returnList = new SoftDrink[amount];
                 return returnList;
             }
+
         }
 
         //the returnList is prepared, now lets get the drinks out of the vending machine and
