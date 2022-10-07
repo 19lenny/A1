@@ -108,7 +108,7 @@ public class VendingMachine {
 
             } else {
                 //calculate what we can provide to the user and what he has to pay for it
-                priceToPay = snacksCompartment.productCounter(snackName) * softDrinkPrice;
+                priceToPay = snacksCompartment.productCounter(snackName) * snackPrice;
 
                 //since we don't have enough in stock, we have to overwrite the customer wish.
                 // we will give him everything what is left on stock for this snack
@@ -141,12 +141,10 @@ public class VendingMachine {
     //refill the drinks with the help of the softDrinksCompartment
     public void refillDrinks(int amount, String drinkName){
         softDrinksCompartment.refill(amount, drinkName);
-        System.out.println("Thanks for refilling the drinks.");
     }
 
     //refill the snacks with the help of the snacksCompartment
     public void refillSnacks(int amount, String snackName){
-        softDrinksCompartment.refill(amount, snackName);
-        System.out.println("Thanks for refilling the snacks.");
+        snacksCompartment.refill(amount, snackName);
     }
 }
