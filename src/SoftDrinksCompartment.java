@@ -1,3 +1,9 @@
+//the class SoftDrinksCompartment creates the SoftDrinkCompartment, which will be used in every VendingMachine
+//It works with two constructor, so the VendingMachine owner can either wish his own capacity, or build a machine with a predefined size
+//the class can count how many products are already in stock
+//the class can tell how many items of a specified product are on stock
+// and the class can either refill the Compartment or take items out of the compartment
+//all logic and details are explained within the methods
 public class SoftDrinksCompartment {
 
     //This field can store the capacity of the SoftDrinksCompartment
@@ -44,6 +50,9 @@ public class SoftDrinksCompartment {
     //This makes sense since we always want to have the newest update of the stock of this specific SoftDrink
     //The method takes a string as an input, which is the product name that should be counted
     //For easier comparison and to avoid typing mistakes all Strings in this method are manipulated to uppercase letters
+    //to do what described, the method compares for every stock item if it is the same as the product the user searches
+    //if so the counter is increased by one
+    //to avoid null pointers we always check first if the slot in the SoftDrinkCompartment is empty or not
     public int productCounter(String product){
         int counter = 0;
         for (int i = 0; i < stock.length; i++) {
@@ -60,11 +69,16 @@ public class SoftDrinksCompartment {
         return counter;
     }
 
+    //by calling this method a user can refill a certain amount of a SoftDrink in the SoftDrinkCompartment
+    //first the remaining slots are calculated, to check if there are enough slots for the amount the user wants to refill
+    //the refill mechanism only starts if enough slots are available, in the other case the user gets its refilling product back and is informed
+    //how the refill process works is described in the 'else' clause
     public void refill(int amount, String filling){
         //calculate the remaining slots for SoftDrinks in our vending machine
         int remainingSlots = capacity - stockCounter();
 
         //If the refiller wants to put more SoftDrinks in the machine as remaining capacity, the method should stop
+        // the method should return the products to the user and inform him
         if (remainingSlots < amount){
             System.out.println("Dear refiller, you tried to refill the vending machine with soft drinks. \n" +
                     "Unfortunately, there are only "+remainingSlots+ " left for soft drinks in the machine. \n" +
@@ -76,9 +90,12 @@ public class SoftDrinksCompartment {
         //the first empty slot is filled with a new soft drink
         //the SoftDrink is created from the name the refiller gets us
         //the vending machine keeps track on how many items are refilled and fills up the stock in the first empty spot.
-        //the vending machine can only fill up as many soft drinks the user wants to refill
+        //as soon as the products the user wants to refill are refilled the method stops, for this a helper counter called filled is initialized
         else{
             int filled = 0;
+            //go through every product in stock, if the slot in stock is empty, fill it with the desired snack
+            //only fill the stock with that many products as the user gave to the Compartment.
+            //As soon all products are refilled, stop the method (break)
             for (int i=0; i<stock.length; i++){
                 if (filled >= amount){
                     break;
@@ -91,7 +108,11 @@ public class SoftDrinksCompartment {
         }
     }
 
-    //if the amount is 0, then the list will be empty and no error occurs
+    //This method dispends a certain amount of a certain SoftDrink
+    //if the amount of dispending is 0, then the list will be empty and no error occurs
+    //to logic behind it, is to first check how many products we have on stock from this certain product
+    //then check if we have enough products in stock, if not return the maximum products to the user, that we can get him
+    //the logic is explained in more detail in the method
     public SoftDrink[] dispender(int amount, String name){
         //initally check how many soft drinks of the asked product are in stock
         int stockOfProduct = productCounter(name);
@@ -107,22 +128,31 @@ public class SoftDrinksCompartment {
         //the users have to be informed that she does not get the full amount or no amount.
         //if we dont have any we can abort the method and just return the empty array
         else{
-
+        //we have some products in stock
             if (stockOfProduct >0) {
+                //inform the user
                 System.out.println("Hey, we are sorry. We don't have " + amount + " " + name + " in Stock. \n" +
                         "But we can give you " + stockOfProduct);
+                //update the amount that the user will get dispended
                 amount = stockOfProduct;
+                //initialize the return list with the new amount
                 returnList = new SoftDrink[amount];
             }
-
+        //we dont have any products in stock
             else {
+                //infrom the user
                 System.out.println("Hey, we are sorry. We don't have any " + name + " in Stock. \n");
+                //set the return amount to 0
                 amount = stockOfProduct;
+                //initialize the return list with a length of 0 and stop the method
                 returnList = new SoftDrink[amount];
                 return returnList;
             }
 
         }
+
+        //until now, the returnlist is only prepared and not filled
+        //no products are dispended so far from the Snacks Compartment, this will change now
 
         //the returnList is prepared, now lets get the drinks out of the vending machine and
         // add them to the customers order = returnList
