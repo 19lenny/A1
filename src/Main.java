@@ -1,10 +1,8 @@
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         //testing
         //the following lines, test every function with the following lines
-        //they are not proper expection tests, but work in kind of a similiar way
+        //they are not proper expection tests, but work in a similiar way
         //it creates a lot of outputs to the terminal
         //the best way of doing is just running method by method and comment out the rest of the methods
 
