@@ -1,3 +1,6 @@
+//The CashCompartment class creates the possibility to store, receive cash and
+//keeps track of the financial recording of every vending machine
+
 import java.util.*;
 public class CashCompartment {
     //this private field variable stores the total amount of cash received from purchases
@@ -25,7 +28,8 @@ public class CashCompartment {
     //If the method finds a value it returns the value
     //If not it returns 0.0
     public double accountingReceipt(int index){
-        //only smaller if it would be smaller or equal than there would be a chance for a zero pointer
+        // if the index is smaller than the entries in the payment list, the method returns the entry on this index
+        // only smaller if it would be smaller or equal than there would be a chance for a zero pointer
         if (index < paymentList.size()){
             return paymentList.get(index);
         }

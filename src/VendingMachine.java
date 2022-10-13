@@ -1,3 +1,5 @@
+//
+//
 public class VendingMachine {
 
     //Field Variables
@@ -32,28 +34,37 @@ public class VendingMachine {
         return softDrinksCompartment;
     }
 
+    //the possibility to buy a wished amount of soft drinks
+    //the buyer has to pay for the amount of drinks she wants to purchase
+    //big method therefore logic explained in the method on the fly
     public SoftDrink[] buySoftDrink(int numberOfDrinks, String drinkName, double cashInput) {
 
         //calculate the price the user has to pay for its products
         double priceToPay = numberOfDrinks * softDrinkPrice;
         //check if the buyer gave enough money. If the price to pay is smaller than the cash input the buyer is allowed to buy his drinks
         if (priceToPay <= cashInput) {
-            //if the number of drinks is smaller than our stock we can give everything to the user
+            //if the number of drinks the user wants is smaller than our stock we can give everything to the user
             if (numberOfDrinks <= softDrinksCompartment.productCounter(drinkName)) {
-                //change calculation
+                //this is the basic case, the user gave enough money and we have enough of the drink on stock
+                //first calculate the change money the buyer gets when buying the drink
                 double change = cashInput - priceToPay;
 
                 //take the users money and add it to our accounting system
                 cashCompartment.receivePayments(cashInput - change);
 
                 //Inform the user about her purchase
-                System.out.println("Thank you for your purchased. You paid " + priceToPay + " for " + numberOfDrinks + " " + drinkName + "\n" +
+                System.out.println("Thank you for your purchase. You paid " + priceToPay + " for " + numberOfDrinks + " " + drinkName + "\n" +
                         "Your change is " + change + " DKK.");
 
                 //retrieve the soft drinks from the soft drinks compartment and return it to the user
                 return softDrinksCompartment.dispender(numberOfDrinks, drinkName);
 
             } else {
+                //else case: user gave enough money, but we don't have enough items on stock
+                //we give all the items we have on stock to the user, we inform the user about the missing items
+                //and return him the money, we didn't use
+                //we add the money we used to our cash compartment
+
                 //calculate what we can provide to the user and what he has to pay for it
                 priceToPay = softDrinksCompartment.productCounter(drinkName) * softDrinkPrice;
 
@@ -85,6 +96,9 @@ public class VendingMachine {
         }
     }
 
+    //the buySnack method does exactly the same as the buySoftDrink method,
+    //but this time for Snacks instead of SoftDrinks.
+    //The logic of the method is the same as the above.
     public Snack[] buySnack(int numberOfSnacks, String snackName, double cashInput) {
 
         //calculate the price the user has to pay for its products
@@ -100,7 +114,7 @@ public class VendingMachine {
                 cashCompartment.receivePayments(cashInput - change);
 
                 //Inform the user about her purchase
-                System.out.println("Thank you for your purchased. You paid " + priceToPay + " for " + numberOfSnacks + " " + snackName + "\n" +
+                System.out.println("Thank you for your purchase. You paid " + priceToPay + " for " + numberOfSnacks + " " + snackName + "\n" +
                         "Your change is " + change + " DKK.");
 
                 //retrieve the snacks from the snacks compartment and return it to the user
@@ -139,11 +153,13 @@ public class VendingMachine {
     }
 
     //refill the drinks with the help of the softDrinksCompartment
+    //gives the user the possibility to refill the amount and product he wants
     public void refillDrinks(int amount, String drinkName){
         softDrinksCompartment.refill(amount, drinkName);
     }
 
     //refill the snacks with the help of the snacksCompartment
+    //gives the user the possibility to refill the amount and product he wants
     public void refillSnacks(int amount, String snackName){
         snacksCompartment.refill(amount, snackName);
     }
